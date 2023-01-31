@@ -12,7 +12,6 @@ c.execute(""" CREATE TABLE termek (
      filmcim text,
      mufaj text,
      idotartam integer,
-     datum integer,
      kapacitas integer,
      PRIMARY KEY(teremszam)
  )""")
