@@ -4,5 +4,7 @@ from pathlib import Path
 
 path = Path('./Movie_db.db')
 
-print(path.is_file())
+if(path.is_file() == False):
+    DB.CreateDB()
+
 #Edb.EditPage()
