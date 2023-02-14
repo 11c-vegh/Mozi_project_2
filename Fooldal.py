@@ -13,21 +13,22 @@ def fooldal(movielist):
     
     ttk.Label(fooldal, text = 'Filmek', font =('Verdana', 15)).grid(row=1, column=2)
     
-    pokember_image = ttk.PhotoImage(file = "../Images/a_csodalatos_pokember_4.png")
-    avatar_image = ttk.PhotoImage(file = "../Images/avatar_a_viz_utja_2.png")
-    uncharted_image = ttk.PhotoImage(file = "../Images/uncharted_2.png")
-    bosszuallok_vegjatek_image = ttk.PhotoImage(file = "../Images/bosszallok_vegjatek_2.png")
-    bosszuallok_image = ttk.PhotoImage(file = "../Images/bosszuallok_2.png")
-    bananos_joe_image = ttk.PhotoImage(file = "../Images/bananos_joe_2.png")
-    kincs_ami_nincs_image = ttk.PhotoImage(file = "../Images/kincs_ami_nincs_2.png")
-    a_keresztapa_image = ttk.PhotoImage(file = "../Images/a_keresztapa_2.png")
-    csillagok_kozott_image = ttk.PhotoImage(file = "../Images/csillagok_kozott_2.png")
-    a_sotet_lovag_image = ttk.PhotoImage(file = "../Images/a_sotet_lovag_2.png")
+    pokember_image = ttk.PhotoImage(file = "Images/a_csodalatos_pokember_4.png")
+    avatar_image = ttk.PhotoImage(file = "Images/avatar_a_viz_utja_2.png")
+    uncharted_image = ttk.PhotoImage(file = "Images/uncharted_2.png")
+    bosszuallok_vegjatek_image = ttk.PhotoImage(file = "Images/bosszallok_vegjatek_2.png")
+    bosszuallok_image = ttk.PhotoImage(file = "Images/bosszuallok_2.png")
+    bananos_joe_image = ttk.PhotoImage(file = "Images/bananos_joe_2.png")
+    kincs_ami_nincs_image = ttk.PhotoImage(file = "Images/kincs_ami_nincs_2.png")
+    a_keresztapa_image = ttk.PhotoImage(file = "Images/a_keresztapa_2.png")
+    csillagok_kozott_image = ttk.PhotoImage(file = "Images/csillagok_kozott_2.png")
+    a_sotet_lovag_image = ttk.PhotoImage(file = "Images/a_sotet_lovag_2.png")
     
     #photoimage = photo.subsample(3,3)
     #200*250-es ek legyenek a képek
-    # https://www.simpleimageresizer.com/upload
+    #https://www.simpleimageresizer.com/upload
     #photo = Label(fooldal, image=photo, height=500, width=300)
+
     pokember_cim = """
     Csodálatos pókember
     """

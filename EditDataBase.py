@@ -1,8 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
+import ClassLibrary as CL
 import sqlite3
-
-root=Tk()
 
 def Kiindulo():
 
@@ -21,6 +20,23 @@ def Kiindulo():
 
     conn.commit()
     conn.close()
+
+def GetMovies():
+    conn = sqlite3.connect("Movie_db.db")
+    c = conn.cursor()
+
+    c.execute("SELECT * FROM termek")
+    records = c.fetchall()
+
+    templist = []
+
+    for record in records:
+        print(record[1])
+        templist.append(CL.Film(record[0], record[1], record[2], record[3], record[4]))
+
+    conn.commit()
+    conn.close()
+    return templist
 
 def Update_movie(teremszam_entry, filmcim_entry, mufaj_entry, idotartam_entry, kapacitas_entry):
     conn = sqlite3.connect("Movie_db.db")
@@ -137,5 +153,3 @@ def EditPage(teremszam):
 
 #ReservationPage()
 #Kiindulo()
-
-root.mainloop()
