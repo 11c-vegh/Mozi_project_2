@@ -5,22 +5,24 @@ import sqlite3
 root=Tk()
 
 def Kiindulo():
+    try:
+        conn = sqlite3.connect("Movie_db.db")
+        c = conn.cursor()
 
-    conn = sqlite3.connect("Movie_db.db")
-    c = conn.cursor()
+        c.execute("SELECT teremszam FROM termek")
+        records = c.fetchall()
 
-    c.execute("SELECT teremszam FROM termek")
-    records = c.fetchall()
-
-    buttons = []
+        buttons = []
     
-    for i in range(0, len(records)):
-        print(i)
-        buttons.append(Button(root, text=i, command=lambda c=i: EditPage(buttons[c].cget("text"))))
-        buttons[i].pack()
+        for i in range(0, len(records)):
+            print(i)
+            buttons.append(Button(root, text=i, command=lambda c=i: EditPage(buttons[c].cget("text"))))
+            buttons[i].pack()
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+        conn.close()
+    except sqlite3.Error:
+        messagebox.showerror("Database error", "Hiba az adat lekérésekor")
 
 def Update_movie(teremszam_entry, filmcim_entry, mufaj_entry, idotartam_entry, kapacitas_entry):
     conn = sqlite3.connect("Movie_db.db")
@@ -70,6 +72,21 @@ def Add_movie(teremszam_entry, filmcim_entry, mufaj_entry, idotartam_entry, kapa
     conn.close()
 
 def Add_Reservation(szekszam_in, t_szam_in, keresztnev_in, vezeteknev_in):
+    try:
+        conn = sqlite3.connect("Movie_db.db")
+        c = conn.cursor()
+
+        c.execute("SELECT szekszam FROM foglalasok ORDER BY szekszam")
+        records = c.fetchall()
+    
+        for i in range(0, len(records)):
+            print(records[i])
+
+        conn.commit()
+        conn.close()
+    except sqlite3.Error:
+        messagebox.showerror("Database error", "Hiba az adat lekérésekor")
+
     try:
         conn = sqlite3.connect("Movie_db.db")
         c = conn.cursor()
@@ -135,6 +152,36 @@ def EditPage(teremszam):
     edit_btn = Button(edit, text="Mentés", command=lambda: [Update_movie(teremszam_entry.get(), filmcim_entry.get(), mufaj_entry.get(), idotartam_entry.get(), kapacitas_entry.get())])
     edit_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipadx=145)
 
+def Test(t_szam):
+    #Algoritmus az első szabad szék kiválasztására
+    try:
+        conn = sqlite3.connect("Movie_db.db")
+        c = conn.cursor()
+
+        c.execute("SELECT kapacitas FROM termek WHERE teremszam="+str(t_szam))
+        records = c.fetchall()
+        kapacitas = records[0][0]
+        print(kapacitas)
+
+        for i in range(0, len(records)):
+            if(records[i][0] == 0):
+                print("Szabad szék")
+            print(records[i][0])
+
+        c.execute("SELECT szekszam FROM foglalas ORDER BY szekszam")
+        records = c.fetchall()
+
+        for i in range(0, kapacitas-1):
+            if(records[i][0] == None):
+                print("Szabad szék")
+            print(records[i][0])
+
+        conn.commit()
+        conn.close()
+    except sqlite3.Error as e:
+        messagebox.showerror("Database error", "Hiba az adat lekérésekor:")
+
+Test(0)
 #ReservationPage()
 #Kiindulo()
 
