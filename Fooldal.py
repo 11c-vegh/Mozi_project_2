@@ -14,7 +14,7 @@ ttk.Label(fooldal1, text = 'Filmek', font =('Verdana', 15)).grid(row=1, column=3
 
 pokember_image = ttk.PhotoImage(file = "Images/a_csodalatos_pokember_4.png")
 avatar_image = ttk.PhotoImage(file = "Images/avatar_a_viz_utja_2.png")
-uncharted_image = ttk.PhotoImage(file = "Images/uncharted_2.png")
+uncharted_image = ttk.PhotoImage(file = "Images/uncharted_2.png ")
 bosszuallok_vegjatek_image = ttk.PhotoImage(file = "Images/bosszallok_vegjatek_2.png")
 bosszuallok_image = ttk.PhotoImage(file = "Images/bosszuallok_2.png")
 bananos_joe_image = ttk.PhotoImage(file = "Images/bananos_joe_2.png")
