@@ -5,8 +5,9 @@ import Database as DB
 import ClassLibrary as CL
 import Fooldal as Mp
 from pathlib import Path
+import ttkbootstrap as ttk
 
-root = Tk()
+#root = Tk()
 path = Path('./Movie_db.db')
 
 if(path.is_file() == False):
@@ -17,4 +18,4 @@ movies = Edb.GetMovies()
 Mp.fooldal(movies)
 #Edb.EditPage()
 
-root.mainloop()
+mainloop()
