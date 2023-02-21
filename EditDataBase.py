@@ -181,7 +181,7 @@ def Test(t_szam):
     except sqlite3.Error as e:
         messagebox.showerror("Database error", "Hiba az adat lekérésekor:")
 
-Test(0)
+#Test()
 #ReservationPage()
 #Kiindulo()
 
