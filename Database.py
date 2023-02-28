@@ -42,4 +42,3 @@ def CreateDB():
     #5. lépés: lezárjuk a kapcsolatot
     conn.close()
 
-CreateDB()

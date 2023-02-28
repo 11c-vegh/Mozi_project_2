@@ -4,7 +4,7 @@ from ttkbootstrap.constants import *
 from PIL import Image, ImageTk
 from tkinter import messagebox
 #Oldal méretezése, Fontok megadása
-def start(a):
+def start():
     root = Tk()
     root.title("Jegyfoglalás")
     style = ttk.Style("darkly")
@@ -22,7 +22,7 @@ def start(a):
     movielength = ""
     releasedate = ""
     fhely = 0
-    roomnumber = a
+    roomnumber = 0
 
     #Megadott adatatok
     fname = ""
@@ -183,3 +183,8 @@ def start(a):
         else:
             messagebox.showerror(title="Hiba", message="Nincs elég szabad férőhely a foglaláshoz!")
 
+   
+
+
+
+    
