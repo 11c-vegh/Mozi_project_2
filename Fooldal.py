@@ -27,10 +27,6 @@ a_sotet_lovag_image = ttk.PhotoImage(file = "Images/a_sotet_lovag_2.png")
 #photoimage = photo.subsample(3,3)
 #200*250-es ek legyenek a képek
 #https://www.simpleimageresizer.com/upload
-#photo = Label(fooldal, image=photo, height=500, width=300)
-pokember_cim = """
-Csodálatos pókember
-"""
 avatar_cim = """
 Avatar: A víz útja
 """
@@ -58,21 +54,16 @@ Csillagok között
 a_sotet_lovag_cim = """
 A sötét lovag
 """
-
+#A képeket nem lehet linkként berakni a főoldalba, mert a képek újra lettek méretezve!
 def fooldal(movie):
-    #ttk.Style.configure('custom.TButton', foreground='white', font=('Helvetica', 24))
-    r = movie[1].filmcim
-    
-    btn_pokember = ttk.Button(fooldal1, text=movie[0].filmcim,image=pokember_image, compound=BOTTOM,bootstyle="light-outline")
+    btn_pokember = ttk.Button(fooldal1, text=movie[0].filmcim, compound=BOTTOM,image=pokember_image,bootstyle="light-outline") #command címszóval kell ide tenni a meghívandó függvényt
     btn_pokember.grid(row=2, column=1, padx=(10,5))
-    btn_avatar = ttk.Button(fooldal1, text=avatar_cim,image=avatar_image,compound=BOTTOM, bootstyle="light-outline").grid(row=2, column=2, padx=(5,5))
-    btn_uncharted = ttk.Button(fooldal1, text=uncharted_cim,image=uncharted_image,compound=BOTTOM, bootstyle="light-outline").grid(row=2, column=3, padx=(5,5))
-    btn_bosszuallok_vegjatek = ttk.Button(fooldal1, text=bosszuallok_vegjatek_cim,image=bosszuallok_vegjatek_image,compound=BOTTOM, bootstyle="light-outline").grid(row=2, column=4, padx=(5,5))
-    btn_bosszuallok = ttk.Button(fooldal1, text=bosszuallok_cim,image=bosszuallok_image,compound=BOTTOM, bootstyle="light-outline").grid(row=2, column=5, padx=(5,5))
-    btn_bananos_joe = ttk.Button(fooldal1, text=bananos_joe_cim,image=bananos_joe_image,compound=BOTTOM, bootstyle="light-outline").grid(row=3, column=1, pady=25, padx=(10,5))
-    btn_kincs_ami_nincs = ttk.Button(fooldal1, text=kincs_ami_nincs_cim,image=kincs_ami_nincs_image,compound=BOTTOM, bootstyle="light-outline").grid(row=3, column=2, pady=25, padx=(5,5))
-    btn_a_kersztapa = ttk.Button(fooldal1, text=a_keresztapa_cim,image=a_keresztapa_image,compound=BOTTOM, bootstyle="light-outline").grid(row=3, column=3, pady=25, padx=(5,5))
-    btn_csillagok_kozott = ttk.Button(fooldal1, text=csillagok_kozott_cim,image=csillagok_kozott_image,compound=BOTTOM, bootstyle="light-outline").grid(row=3, column=4, pady=25, padx=(5,5))
-    btn_a_sotet_lovag = ttk.Button(fooldal1, text=a_sotet_lovag_cim,image=a_sotet_lovag_image,compound=BOTTOM, bootstyle="light-outline").grid(row=3, column=5, pady=25, padx=(5,5))
-    
-    #A buttonok alá a filmek szövegeit kellene majd odaírni
+    btn_avatar = ttk.Button(fooldal1, text=movie[1].filmcim,image=avatar_image,compound=BOTTOM, bootstyle="light-outline").grid(row=2, column=2, padx=(5,5))
+    btn_uncharted = ttk.Button(fooldal1, text=movie[2].filmcim,image=uncharted_image,compound=BOTTOM, bootstyle="light-outline").grid(row=2, column=3, padx=(5,5))
+    btn_bosszuallok_vegjatek = ttk.Button(fooldal1, text=movie[3].filmcim,image=bosszuallok_vegjatek_image,compound=BOTTOM, bootstyle="light-outline").grid(row=2, column=4, padx=(5,5))
+    btn_bosszuallok = ttk.Button(fooldal1, text=movie[4].filmcim,image=bosszuallok_image,compound=BOTTOM, bootstyle="light-outline").grid(row=2, column=5, padx=(5,5))
+    btn_bananos_joe = ttk.Button(fooldal1, text=movie[5].filmcim,image=bananos_joe_image,compound=BOTTOM, bootstyle="light-outline").grid(row=3, column=1, pady=25, padx=(10,5))
+    btn_kincs_ami_nincs = ttk.Button(fooldal1, text=movie[6].filmcim,image=kincs_ami_nincs_image,compound=BOTTOM, bootstyle="light-outline").grid(row=3, column=2, pady=25, padx=(5,5))
+    btn_a_kersztapa = ttk.Button(fooldal1, text=movie[7].filmcim,image=a_keresztapa_image,compound=BOTTOM, bootstyle="light-outline").grid(row=3, column=3, pady=25, padx=(5,5))
+    btn_csillagok_kozott = ttk.Button(fooldal1, text=movie[8].filmcim,image=csillagok_kozott_image,compound=BOTTOM, bootstyle="light-outline").grid(row=3, column=4, pady=25, padx=(5,5))
+    btn_a_sotet_lovag = ttk.Button(fooldal1, text=movie[9].filmcim,image=a_sotet_lovag_image,compound=BOTTOM, bootstyle="light-outline").grid(row=3, column=5, pady=25, padx=(5,5))
