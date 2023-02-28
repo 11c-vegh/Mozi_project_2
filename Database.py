@@ -28,7 +28,12 @@ def CreateDB():
     )""")
 
     #Filmek hozzáadása
-    c.execute("""INSERT INTO termek VALUES (0, 'The Movie', 'Comedy', 200, 100), (1, 'The Movie Sequel', 'Comedy, Action', 150, 200)""")
+    c.execute("""INSERT INTO termek VALUES
+    (0, 'A csodálatos pókember', 'Akció/Kaland/Sci-fi', 136, 100), (1, 'Avatar: A víz útja', 'Sci-fi/Akció', 192, 200), (2, 'Uncharted', 'Sci-fi/Akció', 116, 150),
+    (3, 'Bosszúállók: Végjáték', 'Akció/Sci-fi', 182, 250), (4, 'Bosszúállók', 'Kaland/Akció', 143, 150), (5, 'Banános Joe', 'Filmvígjáték', 92, 100),
+    (6, 'Kincs, ami nincs', 'Akció/Kaland', 102, 100), (7, 'A Keresztapa', 'Krimi', 175, 150), (8, 'Csillagok között', 'Sci-fi', 169, 100), (9, 'A sötét lovag', 'Szuperhős film', 152, 100) """)
+    
+
 
     #4. lépés Kommitoljuk a lépést (alkalmazzuk)
     conn.commit()

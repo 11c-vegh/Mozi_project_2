@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
+import ClassLibrary as CL
 import tkinter.font as font
 
 fooldal1 = Tk()
@@ -60,7 +61,9 @@ A sötét lovag
 
 def fooldal(movie):
     #ttk.Style.configure('custom.TButton', foreground='white', font=('Helvetica', 24))
-    btn_pokember = ttk.Button(fooldal1, text=pokember_cim,image=pokember_image, compound=BOTTOM, bootstyle="light-outline")
+    r = movie[1].filmcim
+    
+    btn_pokember = ttk.Button(fooldal1, text=movie[0].filmcim,image=pokember_image, compound=BOTTOM,bootstyle="light-outline")
     btn_pokember.grid(row=2, column=1, padx=(10,5))
     btn_avatar = ttk.Button(fooldal1, text=avatar_cim,image=avatar_image,compound=BOTTOM, bootstyle="light-outline").grid(row=2, column=2, padx=(5,5))
     btn_uncharted = ttk.Button(fooldal1, text=uncharted_cim,image=uncharted_image,compound=BOTTOM, bootstyle="light-outline").grid(row=2, column=3, padx=(5,5))

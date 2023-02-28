@@ -31,7 +31,6 @@ def GetMovies():
     templist = []
 
     for record in records:
-        print(record[1])
         templist.append(CL.Film(record[0], record[1], record[2], record[3], record[4]))
 
     conn.commit()
