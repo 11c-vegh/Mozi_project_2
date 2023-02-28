@@ -152,36 +152,6 @@ def EditPage(teremszam):
     edit_btn = Button(edit, text="Mentés", command=lambda: [Update_movie(teremszam_entry.get(), filmcim_entry.get(), mufaj_entry.get(), idotartam_entry.get(), kapacitas_entry.get())])
     edit_btn.grid(row=5, column=0, columnspan=2, pady=10, padx=10, ipadx=145)
 
-def Test(t_szam):
-    #Algoritmus az első szabad szék kiválasztására
-    try:
-        conn = sqlite3.connect("Movie_db.db")
-        c = conn.cursor()
-
-        c.execute("SELECT kapacitas FROM termek WHERE teremszam="+str(t_szam))
-        records = c.fetchall()
-        kapacitas = records[0][0]
-        print(kapacitas)
-
-        for i in range(0, len(records)):
-            if(records[i][0] == 0):
-                print("Szabad szék")
-            print(records[i][0])
-
-        c.execute("SELECT szekszam FROM foglalas ORDER BY szekszam")
-        records = c.fetchall()
-
-        for i in range(0, kapacitas-1):
-            if(records[i][0] == None):
-                print("Szabad szék")
-            print(records[i][0])
-
-        conn.commit()
-        conn.close()
-    except sqlite3.Error as e:
-        messagebox.showerror("Database error", "Hiba az adat lekérésekor:")
-
-#Test()
 #ReservationPage()
 #Kiindulo()
 
