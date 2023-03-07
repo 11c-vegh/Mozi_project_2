@@ -3,7 +3,7 @@ from tkinter import *
 import EditDataBase as Edb
 import Database as DB
 import ClassLibrary as CL
-#import Fooldal as Mp
+import Fooldal as Mp
 from pathlib import Path
 import ttkbootstrap as ttk
 import reservation as res
@@ -20,7 +20,7 @@ if(path.is_file() == False):
 movies = Edb.GetMovies()
 
 print(Edb.GetSeats(movies, 0))
-#Mp.fooldal(movies)
+Mp.fooldal(movies)
 #Edb.EditPage()
-res.start(movies,0)
+#res.start(movies,0)
 root.mainloop()

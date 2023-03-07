@@ -3,9 +3,8 @@ from tkinter import messagebox
 import ClassLibrary as CL
 import sqlite3
 
-root=Tk()
-
 def Kiindulo():
+    root = Tk()
     try:
         conn = sqlite3.connect("Movie_db.db")
         c = conn.cursor()
@@ -196,4 +195,4 @@ def EditPage(teremszam):
 #ReservationPage()
 #Kiindulo()
 
-root.mainloop()
+#root.mainloop()
