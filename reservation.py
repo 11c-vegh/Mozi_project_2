@@ -2,7 +2,9 @@ from tkinter import *
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from PIL import Image, ImageTk
+import EditDataBase as Edb
 from tkinter import messagebox
+import math
 import ClassLibrary
 
 #Oldal méretezése, Fontok megadása
@@ -29,6 +31,17 @@ def start(movies, movieid):
     fname = ""
     lname = ""
     wanted = 0
+
+    def SelectSeat():
+        Seats = Edb.GetSeats(movies, movieid)
+        print(len(Seats))
+        SeatPage = Toplevel()
+
+        buttons = []
+
+        for i in range(0, len(Seats)-1):
+            buttons.append(Button(SeatPage, text=i+1))#, command=lambda c=i: EditPage(buttons[c].cget("text"))))
+            buttons[i].grid(row=(len(Seats)-1)-math.floor(i/10), column=i%10)
 
     def reserved():
         
@@ -105,7 +118,7 @@ def start(movies, movieid):
 
         lbl7 = ttk.Label(reserve, text = "Kívánt székek", font='Helvetica 12 bold')
         lbl7.grid(row = 12, column = 1, padx = 2, pady=5)
-        bx = ttk.Button(reserve, text= "Kiválasztás", style='info.TButton')
+        bx = ttk.Button(reserve, text= "Kiválasztás", style='info.TButton', command=SelectSeat)
         bx.grid(row = 13, column=1, padx= 2)
 
         lbl7 = ttk.Label(reserve, text = "Jegytípus", font='Helvetica 12 bold')
@@ -179,9 +192,3 @@ def start(movies, movieid):
         #Amennyiben nincs annyi férőhely amennyit a felhasználó kért, hibaüzenetet ad vissza
         else:
             messagebox.showerror(title="Hiba", message="Nincs elég szabad férőhely a foglaláshoz!")
-
-   
-
-
-
-    

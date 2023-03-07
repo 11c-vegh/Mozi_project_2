@@ -60,12 +60,10 @@ def fooldal(movielist):
     A sötét lovag
     """
     #ttk.Style.configure('custom.TButton', foreground='white', font=('Helvetica', 24))
-    lbl = Label(fooldal1, image=ttk.PhotoImage(file = "./Images/avatar_a_viz_utja_2.png"))
-    lbl.grid(row=0, column=0)
 
-    btn_pokember = ttk.Button(fooldal1, text=movielist[0].filmcim,image=ttk.PhotoImage(file = "Images/a_csodalatos_pokember_4.png"), compound=BOTTOM,bootstyle="light-outline",command=lambda: res.start(movielist, 0)) #command címszóval kell ide tenni a meghívandó függvényt
+    btn_pokember = ttk.Button(fooldal1, text=movielist[0].filmcim,image=pokember_image, compound=BOTTOM,bootstyle="light-outline",command=lambda: res.start(movielist, 0)) #command címszóval kell ide tenni a meghívandó függvényt
     btn_pokember.grid(row=2, column=1, padx=(10,5))
-    btn_avatar = ttk.Button(fooldal1, text=movielist[1].filmcim,compound=BOTTOM,image=ttk.PhotoImage(file = "J:\IKT\Mozi_jegyfoglalo\Mozi_project_2\Images\/avatar_a_viz_utja_2.png"), bootstyle="light-outline", command=lambda: res.start(movielist, 1))
+    btn_avatar = ttk.Button(fooldal1, text=movielist[1].filmcim,compound=BOTTOM,image=avatar_image, bootstyle="light-outline", command=lambda: res.start(movielist, 1))
     btn_avatar.grid(row=2, column=2, padx=(5,5))
     btn_uncharted = ttk.Button(fooldal1, text=movielist[2].filmcim,compound=BOTTOM,image=uncharted_image, bootstyle="light-outline", command=lambda: res.start(movielist, 2)).grid(row=2, column=3, padx=(5,5))
     btn_bosszuallok_vegjatek = ttk.Button(fooldal1, text=movielist[3].filmcim,compound=BOTTOM,image=bosszuallok_vegjatek_image, bootstyle="light-outline", command=lambda: res.start(movielist, 3)).grid(row=2, column=4, padx=(5,5))
@@ -76,4 +74,6 @@ def fooldal(movielist):
     btn_csillagok_kozott = ttk.Button(fooldal1, text=movielist[8].filmcim,compound=BOTTOM,image=csillagok_kozott_image, bootstyle="light-outline", command=lambda: res.start(movielist, 8)).grid(row=3, column=4, pady=25, padx=(5,5))
     btn_a_sotet_lovag = ttk.Button(fooldal1, text=movielist[9].filmcim,compound=BOTTOM,image=a_sotet_lovag_image, bootstyle="light-outline", command=lambda: res.start(movielist, 9)).grid(row=3, column=5, pady=25, padx=(5,5))
     #A buttonok alá a filmek szövegeit kellene majd odaírni
+
+    fooldal1.mainloop()
 
