@@ -15,8 +15,6 @@ path = Path('Movie_db.db')
 
 movies = []
 
-movies = []
-
 if(path.is_file() == False):
     DB.CreateDB() 
 
