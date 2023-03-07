@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+import ClassLibrary as CL
 import sqlite3
 
 root=Tk()
@@ -23,6 +24,48 @@ def Kiindulo():
         conn.close()
     except sqlite3.Error:
         messagebox.showerror("Database error", "Hiba az adat lekérésekor")
+
+def GetMovies():
+    conn = sqlite3.connect("Movie_db.db")
+    c = conn.cursor()
+
+    c.execute("SELECT * FROM termek")
+    records = c.fetchall()
+
+    templist = []
+
+    for record in records:
+        templist.append(CL.Film(record[0], record[1], record[2], record[3], record[4]))
+
+    conn.commit()
+    conn.close()
+    return templist
+
+def GetSeats(movies, t_szam):
+    #a székek 10-esével vannak sorba rendezve(itt még nincs bent)
+    conn = sqlite3.connect("Movie_db.db")
+    c = conn.cursor()
+
+    c.execute("SELECT szekszam FROM foglalas")
+    records = c.fetchall()
+
+    templist = []
+
+    i = 0
+    for i in range(0, movies[t_szam].kapacitas):
+        isSeat = False
+        for record in records:
+            if(i == record[0]):
+                isSeat = True
+                templist.append(1)
+        if(isSeat == False):
+            templist.append(0)
+        print(isSeat)
+        
+
+    conn.commit()
+    conn.close()
+    return templist
 
 def Update_movie(teremszam_entry, filmcim_entry, mufaj_entry, idotartam_entry, kapacitas_entry):
     conn = sqlite3.connect("Movie_db.db")
@@ -75,28 +118,13 @@ def Add_Reservation(szekszam_in, t_szam_in, keresztnev_in, vezeteknev_in):
     try:
         conn = sqlite3.connect("Movie_db.db")
         c = conn.cursor()
-
-        c.execute("SELECT szekszam FROM foglalasok ORDER BY szekszam")
-        records = c.fetchall()
-    
-        for i in range(0, len(records)):
-            print(records[i])
-
-        conn.commit()
-        conn.close()
-    except sqlite3.Error:
-        messagebox.showerror("Database error", "Hiba az adat lekérésekor")
-
-    try:
-        conn = sqlite3.connect("Movie_db.db")
-        c = conn.cursor()
         #A VALUES értékeinek meg kell egyezni a szótár kulcsaival!
         c.execute("INSERT INTO foglalas VALUES (NULL, :t_szam, :szekszam, :keresztnev, :vezeteknev)",
             {
-                't_szam':t_szam_in.get(),
-                'szekszam':szekszam_in.get(),
-                'keresztnev': keresztnev_in.get(),
-                'vezeteknev': vezeteknev_in.get(),
+                't_szam':t_szam_in,
+                'szekszam':szekszam_in,
+                'keresztnev': keresztnev_in,
+                'vezeteknev': vezeteknev_in,
             }
         )
     except sqlite3.Error as err:
@@ -104,11 +132,24 @@ def Add_Reservation(szekszam_in, t_szam_in, keresztnev_in, vezeteknev_in):
     conn.commit()
     conn.close()
 
-def Delete_Reservation(foglalasid):
+def Delete_Reservation(keresztnev, vezeteknev, teremszam, szekszam):
+    foglalasid = 0
     try:
         conn = sqlite3.connect("Movie_db.db")
         c = conn.cursor()
-        c.execute("""DELETE FROM foglalas WHERE foglalassorszam = ?""", foglalasid)
+        c.execute("Select foglalassorszam FROM foglalas WHERE keresztnev = "+keresztnev+" AND vezeteknev = "+vezeteknev+" AND szekszam = "+str(szekszam)+" AND t_szam = "+str(teremszam))
+        records = c.fetchall()
+        records[0][0] = foglalasid
+    except sqlite3.Error as err:
+        messagebox.showerror("Database operation error", err)#"Hiba az adat felvitelekor")
+    conn.commit()
+    conn.close()
+
+    print(foglalasid)
+    try:
+        conn = sqlite3.connect("Movie_db.db")
+        c = conn.cursor()
+        c.execute("DELETE FROM foglalas WHERE foglalassorszam = "+str(foglalasid))
     except sqlite3.Error as err:
         messagebox.showerror("Database operation error", "Hiba az adat felvitelekor")
     conn.commit()
