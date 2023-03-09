@@ -43,7 +43,7 @@ def start(movies, movieid):
 
         buttons = []
 
-        #Gombokat generál, meghatározza, hogy a szék már foglalt-e vagy ki van választva-e és az alapján adja meg, hogy milyen színű legyen
+        #Gombokat generál, meghatározza, hogy a szék már foglalt-e vagy ki van e választva és az alapján adja meg, hogy milyen színű legyen
         for i in range(0, len(Seats)):
             buttons.append(Button(SeatPage, text=i+1, width=3, height=2, command=lambda c=i: AppendorDelete(c, Seats, buttons[c])))
             if(Seats[i] == 1):
@@ -51,7 +51,7 @@ def start(movies, movieid):
             try:
                 if(tempseatids[tempseatids.index(i)] == i):
                     buttons[i].configure(bg="orange")
-            except Exception:
+            except ValueError as err:
                 buttons[i].configure(bg="green")
             buttons[i].grid(row=(len(Seats))-math.floor(i/10), column=i%10, pady=10, padx=10)
 
