@@ -9,6 +9,11 @@ import ClassLibrary
 
 #Oldal méretezése, Fontok megadása
 def start(movies, movieid):
+    #Kiválasztott székeket tartalmazó lista
+    global tempseatids
+    tempseatids = []
+
+
     reserve = Toplevel()
     reserve.title("Jegyfoglalás")
     style = ttk.Style("darkly")
@@ -34,17 +39,38 @@ def start(movies, movieid):
 
     def SelectSeat():
         Seats = Edb.GetSeats(movies, movieid)
-        print(len(Seats))
         SeatPage = Toplevel()
 
         buttons = []
 
-        for i in range(0, len(Seats)-1):
-            buttons.append(Button(SeatPage, text=i+1))#, command=lambda c=i: EditPage(buttons[c].cget("text"))))
-            buttons[i].grid(row=(len(Seats)-1)-math.floor(i/10), column=i%10)
+        #Gombokat generál, meghatározza, hogy a szék már foglalt-e vagy ki van választva-e és az alapján adja meg, hogy milyen színű legyen
+        for i in range(0, len(Seats)):
+            buttons.append(Button(SeatPage, text=i+1, width=3, height=2, command=lambda c=i: AppendorDelete(c, Seats, buttons[c])))
+            if(Seats[i] == 1):
+                buttons[i].configure(bg="red")
+            try:
+                if(tempseatids[tempseatids.index(i)] == i):
+                    buttons[i].configure(bg="orange")
+            except Exception:
+                buttons[i].configure(bg="green")
+            buttons[i].grid(row=(len(Seats))-math.floor(i/10), column=i%10, pady=10, padx=10)
 
-    def reserved():
+    
+    def AppendorDelete(c, Seats, btn):
+        if(Seats[c] == 1):
+            messagebox.showerror("Foglalt", "Kérem válasszon másik széket")
+            return
+        try:
+            tempseatids.remove(c)
+            btn.configure(bg="green")
+        except ValueError:
+            tempseatids.append(c)
+            btn.configure(bg="orange")
+        print(tempseatids)
+    
         
+    
+    def reserved():
 
         #Label-el Főcím
         lbl0 = ttk.Label(reserve, text = "MoziTown | Jegyfoglalás", bootstyle="warning", )
@@ -130,7 +156,6 @@ def start(movies, movieid):
             menu.add_radiobutton(label=option, value=option, variable=option_var)
         mb['menu'] = menu
         mb.grid(row = 13, column=2, padx= 2)
-    
     
 
         #Foglaláshoz, vagy visszalépéshez használható gombok

@@ -51,7 +51,7 @@ def GetSeats(movies, t_szam):
     templist = []
 
     i = 0
-    for i in range(0, movies[t_szam].kapacitas-1):
+    for i in range(0, movies[t_szam].kapacitas):
         isSeat = False
         for record in records:
             if(i == record[0]):
@@ -59,7 +59,6 @@ def GetSeats(movies, t_szam):
                 templist.append(1)
         if(isSeat == False):
             templist.append(0)
-        print(isSeat)
         
 
     conn.commit()
