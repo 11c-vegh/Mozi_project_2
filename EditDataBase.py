@@ -45,7 +45,7 @@ def GetSeats(movies, t_szam):
     conn = sqlite3.connect("Movie_db.db")
     c = conn.cursor()
 
-    c.execute("SELECT szekszam FROM foglalas")
+    c.execute("SELECT szekszam FROM foglalas WHERE t_szam="+str(t_szam))
     records = c.fetchall()
 
     templist = []

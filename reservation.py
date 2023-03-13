@@ -39,6 +39,7 @@ def start(movies, movieid):
 
     def SelectSeat():
         Seats = Edb.GetSeats(movies, movieid)
+        print(Seats)
         SeatPage = Toplevel()
 
         buttons = []
@@ -48,6 +49,8 @@ def start(movies, movieid):
             buttons.append(Button(SeatPage, text=i+1, width=3, height=2, command=lambda c=i: AppendorDelete(c, Seats, buttons[c])))
             if(Seats[i] == 1):
                 buttons[i].configure(bg="red")
+                buttons[i].grid(row=(len(Seats))-math.floor(i/10), column=i%10, pady=10, padx=10)
+                continue
             try:
                 if(tempseatids[tempseatids.index(i)] == i):
                     buttons[i].configure(bg="orange")
@@ -163,7 +166,7 @@ def start(movies, movieid):
         btn1 = ttk.Button(reserve, text= "Vissza", style='danger.TButton', command=lambda: reserve.quit())
         btn1.grid(row = 14, column= 1, padx= 2, pady= 20)
 
-        btn2 = ttk.Button(reserve, text= "Lefoglalás", style='success.TButton', command=lambda: confirm())
+        btn2 = ttk.Button(reserve, text= "Lefoglalás", style='success.TButton', command=lambda: confirm(e1.get(), e2.get()))
         btn2.grid(row = 14, column= 2, padx= 2,)
         
     reserved()
@@ -171,9 +174,14 @@ def start(movies, movieid):
 
 
     #Lefoglalás gomb megnyomása után megnyitott megerősítő függvény
-    def confirm():
+    def confirm(vezeteknev, keresztnev):
 
         if(fhely >= wanted ):   #Megnézi van-e elég férőhely
+
+            #Ragasztószalagos megoldás az adatbázisba felvitelre
+            for i in range(len(tempseatids)):
+                print(i)
+                Edb.Add_Reservation(tempseatids[i] ,movieid, keresztnev, vezeteknev)
 
             #Új ablak megnyitása, méretezése
             cf = Toplevel(reserve)
@@ -194,19 +202,30 @@ def start(movies, movieid):
             separator3.grid(row = 2, column=1, pady= 5, )
 
             #Adatok a lefoglalt jegyről
-            l3 = ttk.Label(cf, text = "Teremszám:" )
+            l3 = ttk.Label(cf, text = "Teremszám:")
             l3.grid(row = 3, column = 1, padx = 2, pady= 10)
-            l3_2 = Label(cf, width = 20 , text= "x")
+            l3_2 = Label(cf, width = 20 , text= str(movieid))
             l3_2.grid(row = 3, column = 2, padx = 2)
 
-            l4 = ttk.Label(cf, text = "Székszám(ok):" )
+            #Stringbe átgenerálása a székeknek
+            szekek = ""
+            index = 0
+            for i in tempseatids:
+                if(index == 0):
+                    szekek += str(i)
+                else:
+                    szekek += ", "+str(i)
+                index += 1
+
+            l4 = ttk.Label(cf, text = "Székszám(ok):")
             l4.grid(row = 4, column = 1, padx = 2, pady= 10)
-            l4_2 = Label(cf, width = 20 , text= "x")
+            l4_2 = Label(cf, width = 20 , text= szekek)
             l4_2.grid(row = 4, column = 2, padx = 2)
 
             separator4 = ttk.Separator(cf, orient='horizontal', )
             separator4.grid(row = 5, column=1, pady= 5, )
 
+            #Minden széknek külön foglalási száma van így ez nehezen megoldható
 
             l3 = ttk.Label(cf, text = "Foglalási szám", font='Helvetica 16 bold', bootstyle="Info")
             l3.grid(row = 6, column = 1, padx = 2, pady= 10)
