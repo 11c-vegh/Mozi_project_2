@@ -4,6 +4,9 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 import tkinter.font as font
 import reservation as res
+import plotly.express as px
+import pandas as pd
+
 
 def fooldal(movielist):
     fooldal1 = Toplevel()
@@ -75,5 +78,25 @@ def fooldal(movielist):
     btn_a_sotet_lovag = ttk.Button(fooldal1, text=movielist[9].filmcim,compound=BOTTOM,image=a_sotet_lovag_image, bootstyle="light-outline", command=lambda: res.start(movielist, 9)).grid(row=3, column=5, pady=25, padx=(5,5))
     #A buttonok alá a filmek szövegeit kellene majd odaírni
 
+    btn_barchart = ttk.Button(fooldal1, text="Statisztika", compound=BOTTOM,bootstyle="light-outline",command=lambda: barchart()).grid(row=4, column=3, pady=25, padx=(5,5))
+    def barchart():
+        
+        for i in range(11):
+          
+        
+       
+        df = pd.DataFrame({
+
+        "terem": [ '0', '1', '2', '3', '4', '5'],
+
+        "helyek": [,a1,a2,a3,a4,a5,a6,a7,a8,a9]
+
+        })
+
+        fig = px.bar(df, x='terem', y='helyek')
+
+        fig.show()
+
     fooldal1.mainloop()
+
 
