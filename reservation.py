@@ -5,6 +5,7 @@ from PIL import Image, ImageTk
 import EditDataBase as Edb
 from tkinter import messagebox
 import math
+import sqlite3
 import ClassLibrary
 
 #Oldal méretezése, Fontok megadása
@@ -31,15 +32,13 @@ def start(movies, movieid):
     movielength = movies[movieid].idotartam
     fhely = movies[movieid].kapacitas
     roomnumber = movies[movieid].teremszam
-    reservedseats = 0
+    Seats = Edb.GetSeats(movies, movieid)
     #Megadott adatatok
     fname = ""
     lname = ""
     wanted = 0
 
     def SelectSeat():
-        Seats = Edb.GetSeats(movies, movieid)
-        print(Seats)
         SeatPage = Toplevel()
 
         buttons = []
@@ -74,6 +73,10 @@ def start(movies, movieid):
         
     
     def reserved():
+        reservedseats = 0
+        for i in Seats:
+            if(i == 1):
+                reservedseats += 1
 
         #Label-el Főcím
         lbl0 = ttk.Label(reserve, text = "MoziTown | Jegyfoglalás", bootstyle="warning", )
@@ -236,3 +239,47 @@ def start(movies, movieid):
         #Amennyiben nincs annyi férőhely amennyit a felhasználó kért, hibaüzenetet ad vissza
         else:
             messagebox.showerror(title="Hiba", message="Nincs elég szabad férőhely a foglaláshoz!")
+
+def getitem(a):
+    global selected_id
+    listselection = listBox.selection()[0]
+    selected_id = listBox.item(listselection)["values"][0]
+    print(selected_id)
+
+def DeleteReservaton(vezeteknev, keresztnev):
+    selected_id = 0
+    deletePage = Toplevel()
+    global listBox
+    conn = sqlite3.connect("Movie_db.db")
+    c = conn.cursor()
+    c.execute("Select vezeteknev, keresztnev FROM foglalas")
+    records = c.fetchall()
+    for record in records:
+        print(record[0]+","+record[1])
+    conn.close()
+    print("sda")
+    try:
+        conn = sqlite3.connect("Movie_db.db")
+        c = conn.cursor()
+        c.execute("Select foglalassorszam, t_szam, szekszam FROM foglalas WHERE keresztnev = '"+keresztnev+"' AND vezeteknev = '"+vezeteknev+"'")
+        records = c.fetchall()
+        cols = ('Foglalási_Szám', 'teremszám', 'székszám')
+        listBox = ttk.Treeview(deletePage, columns=cols, show='headings', selectmode=BROWSE)
+        #Treeview insert
+        for record in records:
+            listBox.insert("", "end", values=(record[0], record[1] ,record[2]))
+        for col in cols:
+            listBox.heading(col, text=col)
+        conn.close()
+    except sqlite3.Error as err:
+        messagebox.showerror("Database operation error", err)#"Hiba az adat felvitelekor")
+    except:
+        messagebox.showerror("Something is wrong", "Basic error")
+    listBox.grid(row=1, column=0, columnspan=2)
+    listBox.bind("<<TreeviewSelect>>", getitem)
+    btn1 = ttk.Button(deletePage, text= "Foglalás törlése", style='danger.TButton', command=lambda: [CheckId(), deletePage.destroy()]).grid(row=5, column=5, pady=25)
+    print(selected_id)
+
+def CheckId():
+    if(selected_id != 0):
+        Edb.Delete_Reservation(selected_id)

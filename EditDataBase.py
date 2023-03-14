@@ -116,6 +116,7 @@ def Add_Reservation(szekszam_in, t_szam_in, keresztnev_in, vezeteknev_in):
     try:
         conn = sqlite3.connect("Movie_db.db")
         c = conn.cursor()
+        c.execute("begin")
         #A VALUES értékeinek meg kell egyezni a szótár kulcsaival!
         c.execute("INSERT INTO foglalas VALUES (NULL, :t_szam, :szekszam, :keresztnev, :vezeteknev)",
             {
@@ -130,19 +131,7 @@ def Add_Reservation(szekszam_in, t_szam_in, keresztnev_in, vezeteknev_in):
     conn.commit()
     conn.close()
 
-def Delete_Reservation(keresztnev, vezeteknev, teremszam, szekszam):
-    foglalasid = 0
-    try:
-        conn = sqlite3.connect("Movie_db.db")
-        c = conn.cursor()
-        c.execute("Select foglalassorszam FROM foglalas WHERE keresztnev = "+keresztnev+" AND vezeteknev = "+vezeteknev+" AND szekszam = "+str(szekszam)+" AND t_szam = "+str(teremszam))
-        records = c.fetchall()
-        records[0][0] = foglalasid
-    except sqlite3.Error as err:
-        messagebox.showerror("Database operation error", err)#"Hiba az adat felvitelekor")
-    conn.commit()
-    conn.close()
-
+def Delete_Reservation(foglalasid):
     print(foglalasid)
     try:
         conn = sqlite3.connect("Movie_db.db")

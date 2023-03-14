@@ -10,7 +10,7 @@ import pandas as pd
 
 def fooldal(movielist):
     fooldal1 = Toplevel()
-    fooldal1.geometry('1180x750')
+    fooldal1.geometry('1200x800')
     fooldal1.title("Főoldal")
     fooldal1.configure(bg='black')
     hatter = ttk.Style('darkly')
@@ -76,7 +76,14 @@ def fooldal(movielist):
     btn_a_kersztapa = ttk.Button(fooldal1, text=movielist[7].filmcim,compound=BOTTOM,image=a_keresztapa_image, bootstyle="light-outline", command=lambda: res.start(movielist, 7)).grid(row=3, column=3, pady=25, padx=(5,5))
     btn_csillagok_kozott = ttk.Button(fooldal1, text=movielist[8].filmcim,compound=BOTTOM,image=csillagok_kozott_image, bootstyle="light-outline", command=lambda: res.start(movielist, 8)).grid(row=3, column=4, pady=25, padx=(5,5))
     btn_a_sotet_lovag = ttk.Button(fooldal1, text=movielist[9].filmcim,compound=BOTTOM,image=a_sotet_lovag_image, bootstyle="light-outline", command=lambda: res.start(movielist, 9)).grid(row=3, column=5, pady=25, padx=(5,5))
-    #A buttonok alá a filmek szövegeit kellene majd odaírni
+    
+    lbl_vezeteknev = ttk.Label(fooldal1, text = "Vezetéknév", font='Helvetica 12 bold').grid(row=4, column=1, pady=25)
+    vezeteknev_entry = ttk.Entry(fooldal1, style='info.TEntry')
+    vezeteknev_entry.grid(row=4, column=2, pady=25)
+    lbl_keresztnev = ttk.Label(fooldal1, text = "Keresztnév", font='Helvetica 12 bold').grid(row=4, column=3, pady=25)
+    keresztnev_entry = ttk.Entry(fooldal1, style='info.TEntry')
+    keresztnev_entry.grid(row=4, column=4, pady=25)
+    btn1 = ttk.Button(fooldal1, text= "Foglalás törlése", style='danger.TButton', command=lambda: res.DeleteReservaton(vezeteknev_entry.get(), keresztnev_entry.get())).grid(row=5, column=5, pady=25)
 
     btn_barchart = ttk.Button(fooldal1, text="Statisztika", compound=BOTTOM,bootstyle="light-outline",command=lambda: barchart()).grid(row=4, column=3, pady=25, padx=(5,5))
     def barchart():
