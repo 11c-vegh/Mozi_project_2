@@ -3,8 +3,12 @@ import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 import tkinter.font as font
+import EditDataBase as Edb
 import reservation as res
 import plotly.express as px
+import plotly.graph_objs as go
+import plotly.io as pio
+from chart_studio.plotly import iplot
 import pandas as pd
 
 
@@ -85,24 +89,44 @@ def fooldal(movielist):
     keresztnev_entry.grid(row=4, column=4, pady=25)
     btn1 = ttk.Button(fooldal1, text= "Foglalás törlése", style='danger.TButton', command=lambda: res.DeleteReservaton(vezeteknev_entry.get(), keresztnev_entry.get())).grid(row=5, column=5, pady=25)
 
-    btn_barchart = ttk.Button(fooldal1, text="Statisztika", compound=BOTTOM,bootstyle="light-outline",command=lambda: barchart()).grid(row=4, column=3, pady=25, padx=(5,5))
+    btn_barchart = ttk.Button(fooldal1, text="Statisztika", compound=BOTTOM,bootstyle="light-outline",command=lambda: barchart()).grid(row=5, column=1, pady=25, padx=(5,5))
     def barchart():
         
-        for i in range(11):
-          
+        pio.renderers.default = 'browser'
+
+        movienames = []
+        foglaltszazalek = []
+
+        for i in range(len(movielist)):
+            ossz = 0
+            Seats = Edb.GetSeats(movielist, i)
+            reservedseats = 0
+            for i in Seats:
+                if(i == 1):
+                    reservedseats += 1
+            foglaltszazalek.append((reservedseats/movielist[i].kapacitas)*100)
+
+
+        for i in range(len(movielist)):
+            movienames.append(movielist[i].filmcim)
         
-       
-        df = pd.DataFrame({
 
-        "terem": [ '0', '1', '2', '3', '4', '5'],
-
-        "helyek": [,a1,a2,a3,a4,a5,a6,a7,a8,a9]
-
-        })
-
-        fig = px.bar(df, x='terem', y='helyek')
-
+        fig = go.Figure([go.Bar(x=movienames, y=foglaltszazalek)])
         fig.show()
+
+       
+        #df = pd.DataFrame({
+
+        #"terem": [ '0', '1', '2', '3', '4', '5'],
+
+        #"helyek": [,a1,a2,a3,a4,a5,a6,a7,a8,a9]
+
+        #})
+
+        #fig = px.bar(df, x='terem', y='helyek')
+
+        #fig.show()
+    
 
     fooldal1.mainloop()
 
