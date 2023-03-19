@@ -10,7 +10,6 @@ import reservation as res
 
 root = Tk()
 path = Path('Movie_db.db')
-print(path)
 
 movies = []
 
