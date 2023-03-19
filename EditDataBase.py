@@ -15,7 +15,6 @@ def Kiindulo():
         buttons = []
     
         for i in range(0, len(records)):
-            print(i)
             buttons.append(Button(root, text=i, command=lambda c=i: EditPage(buttons[c].cget("text"))))
             buttons[i].pack()
 
