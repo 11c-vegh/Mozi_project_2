@@ -40,6 +40,7 @@ def start(movies, movieid):
 
     def SelectSeat():
         SeatPage = Toplevel()
+        SeatPage.title = "Válasszon széket"
 
         buttons = []
 

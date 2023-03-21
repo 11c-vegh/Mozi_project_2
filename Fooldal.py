@@ -5,7 +5,7 @@ from ttkbootstrap.constants import *
 import tkinter.font as font
 import EditDataBase as Edb
 import reservation as res
-import plotly.express as px
+
 import plotly.graph_objs as go
 import plotly.io as pio
 import pandas as pd
