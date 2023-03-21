@@ -45,6 +45,7 @@ def start(movies, movieid):
         buttons = []
 
         #Gombokat generál, meghatározza, hogy a szék már foglalt-e vagy ki van e választva és az alapján adja meg, hogy milyen színű legyen
+        #Lehet a kiválasztás oldalon egy kiválasztás gomb ami menti a kiválasztott székeket
         for i in range(0, len(Seats)):
             buttons.append(Button(SeatPage, text=i+1, width=3, height=2, command=lambda c=i: AppendorDelete(c, Seats, buttons[c])))
             if(Seats[i] == 1):
