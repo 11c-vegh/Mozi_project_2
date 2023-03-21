@@ -254,10 +254,7 @@ def DeleteReservaton(vezeteknev, keresztnev):
     c = conn.cursor()
     c.execute("Select vezeteknev, keresztnev FROM foglalas")
     records = c.fetchall()
-    for record in records:
-        print(record[0]+","+record[1])
     conn.close()
-    print("sda")
     try:
         conn = sqlite3.connect("Movie_db.db")
         c = conn.cursor()
@@ -278,7 +275,6 @@ def DeleteReservaton(vezeteknev, keresztnev):
     listBox.grid(row=1, column=0, columnspan=2)
     listBox.bind("<<TreeviewSelect>>", getitem)
     btn1 = ttk.Button(deletePage, text= "Foglalás törlése", style='danger.TButton', command=lambda: [CheckId(), deletePage.destroy()]).grid(row=5, column=5, pady=25)
-    print(selected_id)
 
 def CheckId():
     if(selected_id != 0):
