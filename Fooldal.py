@@ -5,10 +5,9 @@ from ttkbootstrap.constants import *
 import tkinter.font as font
 import EditDataBase as Edb
 import reservation as res
-import plotly.express as px
+
 import plotly.graph_objs as go
 import plotly.io as pio
-from chart_studio.plotly import iplot
 import pandas as pd
 
 
