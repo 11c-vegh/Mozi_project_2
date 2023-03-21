@@ -44,7 +44,7 @@ def start(movies, movieid):
         buttons = []
 
         #Gombokat generál, meghatározza, hogy a szék már foglalt-e vagy ki van e választva és az alapján adja meg, hogy milyen színű legyen
-        for i in range(0, len(Seats)):
+        for i in range(0, len(Seats)-1):
             buttons.append(Button(SeatPage, text=i+1, width=3, height=2, command=lambda c=i: AppendorDelete(c, Seats, buttons[c])))
             if(Seats[i] == 1):
                 buttons[i].configure(bg="red")
@@ -153,15 +153,15 @@ def start(movies, movieid):
         bx = ttk.Button(reserve, text= "Kiválasztás", style='info.TButton', command=SelectSeat)
         bx.grid(row = 13, column=1, padx= 2)
 
-        lbl7 = ttk.Label(reserve, text = "Jegytípus", font='Helvetica 12 bold')
-        lbl7.grid(row = 12, column = 2, padx = 2, pady=5)
-        mb = ttk.Menubutton(reserve, text='Válasszon jegytípust!', style='info.Outline.TMenubutton')
-        menu = Menu(mb)
-        option_var = StringVar()
-        for option in ['Felnőtt', 'Diák', 'Nyugdíjas']:
-            menu.add_radiobutton(label=option, value=option, variable=option_var)
-        mb['menu'] = menu
-        mb.grid(row = 13, column=2, padx= 2)
+        #lbl7 = ttk.Label(reserve, text = "Jegytípus", font='Helvetica 12 bold')
+        #lbl7.grid(row = 12, column = 2, padx = 2, pady=5)
+        #mb = ttk.Menubutton(reserve, text='Válasszon jegytípust!', style='info.Outline.TMenubutton')
+        #menu = Menu(mb)
+        #option_var = StringVar()
+        #for option in ['Felnőtt', 'Diák', 'Nyugdíjas']:
+        #    menu.add_radiobutton(label=option, value=option, variable=option_var)
+        #mb['menu'] = menu
+        #mb.grid(row = 13, column=2, padx= 2)
     
 
         #Foglaláshoz, vagy visszalépéshez használható gombok
@@ -215,11 +215,11 @@ def start(movies, movieid):
             index = 0
             for i in tempseatids:
                 if(index == 0):
-                    szekek += str(i)
+                    szekek += str(i +1 )
                 else:
-                    szekek += ", "+str(i)
+                    szekek += ", "+str(i +1)
                 index += 1
-
+            #Lefoglalt székek kiírása
             l4 = ttk.Label(cf, text = "Székszám(ok):")
             l4.grid(row = 4, column = 1, padx = 2, pady= 10)
             l4_2 = Label(cf, width = 20 , text= szekek)
@@ -228,11 +228,15 @@ def start(movies, movieid):
             separator4 = ttk.Separator(cf, orient='horizontal', )
             separator4.grid(row = 5, column=1, pady= 5, )
 
-            #Minden széknek külön foglalási száma van így ez nehezen megoldható
+            conn = sqlite3.connect("Movie_db.db")
+            c = conn.cursor()
+            c.execute("Select foglalassorszam FROM foglalas WHERE keresztnev = '"+keresztnev+"' AND vezeteknev = '"+vezeteknev+"'")
+            records = c.fetchall()
+
 
             l3 = ttk.Label(cf, text = "Foglalási szám", font='Helvetica 16 bold', bootstyle="Info")
             l3.grid(row = 6, column = 1, padx = 2, pady= 10)
-            l3_2 = Label(cf, width = 20 , text= "x")
+            l3_2 = Label(cf, width = 20 , text= records[0])
             l3_2.grid(row = 6, column = 2, padx = 2)
 
             
@@ -264,7 +268,7 @@ def DeleteReservaton(vezeteknev, keresztnev):
         listBox = ttk.Treeview(deletePage, columns=cols, show='headings', selectmode=BROWSE)
         #Treeview insert
         for record in records:
-            listBox.insert("", "end", values=(record[0], record[1] ,record[2]))
+            listBox.insert("", "end", values=(record[0], record[1] ,record[2]+1))
         for col in cols:
             listBox.heading(col, text=col)
         conn.close()
