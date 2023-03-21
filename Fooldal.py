@@ -86,7 +86,7 @@ def fooldal(movielist):
     lbl_keresztnev = ttk.Label(fooldal1, text = "Keresztnév", font='Helvetica 12 bold').grid(row=4, column=3, pady=25)
     keresztnev_entry = ttk.Entry(fooldal1, style='info.TEntry')
     keresztnev_entry.grid(row=4, column=4, pady=25)
-    btn1 = ttk.Button(fooldal1, text= "Foglalás törlése", style='danger.TButton', command=lambda: res.DeleteReservaton(vezeteknev_entry.get(), keresztnev_entry.get())).grid(row=5, column=5, pady=25)
+    btn1 = ttk.Button(fooldal1, text= "Foglalás törlése", style='danger.TButton', command=lambda: res.DeleteReservation(vezeteknev_entry.get(), keresztnev_entry.get())).grid(row=5, column=5, pady=25)
 
     btn_barchart = ttk.Button(fooldal1, text="Statisztika", compound=BOTTOM,bootstyle="light-outline",command=lambda: barchart()).grid(row=5, column=1, pady=25, padx=(5,5))
     def barchart():

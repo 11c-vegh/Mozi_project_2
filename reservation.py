@@ -248,7 +248,7 @@ def getitem(a):
     selected_id = listBox.item(listselection)["values"][0]
     print(selected_id)
 
-def DeleteReservaton(vezeteknev, keresztnev):
+def DeleteReservation(vezeteknev, keresztnev):
     selected_id = 0
     deletePage = Toplevel()
     global listBox

@@ -40,7 +40,7 @@ def GetMovies():
     return templist
 
 def GetSeats(movies, t_szam):
-    #a székek 10-esével vannak sorba rendezve(itt még nincs bent)
+    #Egy bizonyos teremben székek lekérése adatbázisból
     conn = sqlite3.connect("Movie_db.db")
     c = conn.cursor()
 
