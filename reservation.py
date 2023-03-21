@@ -166,7 +166,7 @@ def start(movies, movieid):
 
         #Foglaláshoz, vagy visszalépéshez használható gombok
 
-        btn1 = ttk.Button(reserve, text= "Vissza", style='danger.TButton', command=lambda: reserve.quit())
+        btn1 = ttk.Button(reserve, text= "Vissza", style='danger.TButton', command=lambda: reserve.destroy())
         btn1.grid(row = 14, column= 1, padx= 2, pady= 20)
 
         btn2 = ttk.Button(reserve, text= "Lefoglalás", style='success.TButton', command=lambda: confirm(e1.get(), e2.get()))

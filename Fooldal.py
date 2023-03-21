@@ -8,7 +8,6 @@ import reservation as res
 import plotly.express as px
 import plotly.graph_objs as go
 import plotly.io as pio
-from chart_studio.plotly import iplot
 import pandas as pd
 
 
@@ -19,7 +18,7 @@ def fooldal(movielist):
     fooldal1.configure(bg='black')
     hatter = ttk.Style('darkly')
     
-    ttk.Label(fooldal1, text = 'Filmek', font =('Verdana', 15)).grid(row=1, column=2)
+    ttk.Label(fooldal1, text = 'Filmek', font =('Verdana', 15)).grid(row=1, column=3)
     
     pokember_image = ttk.PhotoImage(file = r"Images\a_csodalatos_pokember_4.png")
     avatar_image = ttk.PhotoImage(file = "./Images/avatar_a_viz_utja_2.png")
