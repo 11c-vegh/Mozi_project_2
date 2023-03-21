@@ -40,11 +40,13 @@ def start(movies, movieid):
 
     def SelectSeat():
         SeatPage = Toplevel()
+        SeatPage.title = "Válasszon széket"
 
         buttons = []
 
         #Gombokat generál, meghatározza, hogy a szék már foglalt-e vagy ki van e választva és az alapján adja meg, hogy milyen színű legyen
-        for i in range(0, len(Seats)-1):
+        #Lehet a kiválasztás oldalon egy kiválasztás gomb ami menti a kiválasztott székeket
+        for i in range(0, len(Seats)):
             buttons.append(Button(SeatPage, text=i+1, width=3, height=2, command=lambda c=i: AppendorDelete(c, Seats, buttons[c])))
             if(Seats[i] == 1):
                 buttons[i].configure(bg="red")
@@ -166,7 +168,7 @@ def start(movies, movieid):
 
         #Foglaláshoz, vagy visszalépéshez használható gombok
 
-        btn1 = ttk.Button(reserve, text= "Vissza", style='danger.TButton', command=lambda: reserve.quit())
+        btn1 = ttk.Button(reserve, text= "Vissza", style='danger.TButton', command=lambda: reserve.destroy())
         btn1.grid(row = 14, column= 1, padx= 2, pady= 20)
 
         btn2 = ttk.Button(reserve, text= "Lefoglalás", style='success.TButton', command=lambda: confirm(e1.get(), e2.get()))
@@ -250,7 +252,7 @@ def getitem(a):
     selected_id = listBox.item(listselection)["values"][0]
     print(selected_id)
 
-def DeleteReservaton(vezeteknev, keresztnev):
+def DeleteReservation(vezeteknev, keresztnev):
     selected_id = 0
     deletePage = Toplevel()
     global listBox
